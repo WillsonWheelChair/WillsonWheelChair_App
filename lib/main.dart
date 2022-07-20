@@ -1,76 +1,62 @@
 import 'package:flutter/material.dart';
-import 'package:kakaomap_webview/kakaomap_webview.dart';
+import 'package:flutter_kakao_map/flutter_kakao_map.dart';
+import 'package:flutter_kakao_map/kakao_maps_flutter_platform_interface.dart';
 
-void main() {
-  runApp(
-      MaterialApp(
-        title: 'WillsonWheelchair',
-        initialRoute: '/',
-        routes: {
-          '/': (context) => const MyApp()
-        },
-      )
-  );
-}
+void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      debugShowCheckedModeBanner: false,
+      home: const MyAppOne(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
-  final String title;
+class MyAppOne extends StatefulWidget {
+  const MyAppOne({Key? key}) : super(key: key);
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<MyAppOne> createState() => _MyAppOneState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+class _MyAppOneState extends State<MyAppOne> {
+  late KakaoMapController mapController;
+  MapPoint _visibleRegion = const MapPoint(37.5087553, 127.0632877);
+  final CameraPosition _kInitialPosition =
+      const CameraPosition(target: MapPoint(37.5087553, 127.0632877), zoom: 5);
 
-  void _incrementCounter() {
+  void onMapCreated(KakaoMapController controller) async {
+    final MapPoint visibleRegion = await controller.getMapCenterPoint();
     setState(() {
-      _counter++;
+      mapController = controller;
+      _visibleRegion = visibleRegion;
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
+      appBar: AppBar(title: const Text('Flutter KakoMap example'),),
+      body: Column(
+        children: [
+          Center(
+            child: SizedBox(
+              width: 300.0,
+              height: 200.0,
+              child: KakaoMap(
+                onMapCreated: onMapCreated,
+                initialCameraPosition: _kInitialPosition,
+              ),
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
-        ),
+          )
+        ],
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), //
     );
   }
 }
+
+

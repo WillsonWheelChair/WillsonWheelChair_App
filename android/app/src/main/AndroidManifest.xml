@@ -1,12 +1,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.willsonwheelchair_app">
+    <uses-permission android:name="android.permission.INTERNET" />
    <application
         android:label="willsonwheelchair_app"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher"
-        android:usesCleartextTraffic="true"
-       tools:targetApi="m">
+        android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -21,6 +20,7 @@
                  to determine the Window background behind the Flutter UI. -->
             <meta-data
               android:name="io.flutter.embedding.android.NormalTheme"
+              android:value="0189d15fa16bb82f59538329506304a1"
               android:resource="@style/NormalTheme"
               />
             <intent-filter>
