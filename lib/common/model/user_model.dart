@@ -7,6 +7,7 @@ class Usermodel {
   String name;
   bool isDisabled;
   bool isHelper;
+  String wheelChairBluetoothName;
 
   Usermodel(
     {
@@ -15,7 +16,8 @@ class Usermodel {
       required this.email,
       required this.name,
       required this.isDisabled,
-      required this.isHelper
+      required this.isHelper,
+      required this.wheelChairBluetoothName
     }
   );
 
@@ -25,7 +27,8 @@ class Usermodel {
       email = json['email'],
       name = json['name'],
       isDisabled = json['isDisabled'],
-      isHelper = json['isHelper'];
+      isHelper = json['isHelper'],
+      wheelChairBluetoothName = json['wheelChairBluetoothName'];
 
   Map<String, dynamic> toJson() => {
     'uid': uid,
@@ -33,6 +36,7 @@ class Usermodel {
     'email': email,
     'name': name,
     'isDisabled': isDisabled,
-    'isHelper': isHelper
+    'isHelper': isHelper,
+    'wheelChairBluetoothName': wheelChairBluetoothName
   };
 }
