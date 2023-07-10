@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:kakaomap_webview/kakaomap_webview.dart';
+import 'package:willsonwheelchair_app/pages/bluetooth/bluetooth_connect.dart';
 
 const String _kakaoMapKey = 'efe8d05ab94a0497ce8225aaab155241';
 
@@ -10,7 +12,7 @@ class HomeViewPage extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: AppBar(title: const Text('Kakao map webview test')),
+      appBar: AppBar(title: const Text('main')),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
@@ -55,6 +57,12 @@ class HomeViewPage extends StatelessWidget {
                 ScaffoldMessenger.of(context)
                     .showSnackBar(SnackBar(content: Text(message.message)));
               }),
+            ElevatedButton(
+              onPressed: () {
+                Get.to(BluetoothConnect(title: 'hello'));
+              },
+              child: Text('connect bluetooth'),
+            )
         ],
       ),
     );
